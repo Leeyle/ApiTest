@@ -1,0 +1,59 @@
+{% extends "arya/layout.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>列表页面</h1>
+
+        {% if cl.search_list %}
+        <div>
+            <form method='GET'>
+                <input type="text" name="q" value="{{ cl.q_value }}" class="form-control" style="display: inline-block;width: 200px;" />
+                <input type="submit" value="搜索" class="btn btn-primary" />
+            </form>
+        </div>
+        {% endif %}
+
+        <div style="margin: 10px 0">
+            {% if cl.show_add %}
+                <a class="btn btn-primary" href="{{ cl.add_url }}">添加</a>
+            {% endif %}
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            {% if cl.actions %}
+            <div style="margin: 10px 0">
+                <select class="form-control" style="width: 200px;display: inline-block" name="select_ac">
+                    {% for item in cl.action_options %}
+                        <option value="{{ item.value }}">{{ item.text }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="执行" class="btn btn-success" />
+            </div>
+            {% endif %}
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                    {% for item in cl.table_header %}
+                        <th>{{ item }}</th>
+                    {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                {% for row in cl.table_body %}
+                    <tr>
+                        {% for col in row %}
+                            <td>{{ col }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+            <ul class="pagination">
+                {{ cl.page_html|safe }}
+            </ul>
+        </form>
+    </div>
+
+{% endblock %}

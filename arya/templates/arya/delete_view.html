@@ -1,0 +1,11 @@
+{% extends "arya/layout.html" %}
+
+{% block content %}
+    <div>
+        <h1>是否确定删除</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="确定" />
+        </form>
+    </div>
+{% endblock %}

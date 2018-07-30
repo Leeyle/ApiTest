@@ -1,0 +1,26 @@
+{% load rbac %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/arya/plugins/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="/static/rbac/rbac.css" />
+    {% block css %} {% endblock %}
+</head>
+<body>
+    <div style='height: 48px;background-color: #2b669a'>
+        头部内容
+    </div>
+    <div>
+        <div style="width: 20%;min-height: 500px;float: left;background-color: #dddddd">
+            {% menu_html request %}
+        </div>
+        <div style="width: 80%;min-height: 500px;float: left">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+        <script src="/static/jquery-3.2.1.min.js"></script>
+        <script src="/static/rbac/rbac.js"></script>
+</body>
+</html>
